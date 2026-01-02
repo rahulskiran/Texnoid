@@ -193,12 +193,12 @@ const App = () => {
                 <Link key={link} to="/work" className="text-sm font-semibold text-slate-600 hover:text-red-600 transition-colors">
                   {link}
                 </Link>
-              ) : link === 'Home' ? (
-                <Link key={link} to="/" className="text-sm font-semibold text-slate-600 hover:text-red-600 transition-colors">
-                  {link}
-                </Link>
               ) : link === 'Contact' ? (
                 <Link key={link} to="/contact" className="text-sm font-semibold text-slate-600 hover:text-red-600 transition-colors">
+                  {link}
+                </Link>
+              ) : link === 'Home' ? (
+                <Link key={link} to="/" className="text-sm font-semibold text-slate-600 hover:text-red-600 transition-colors">
                   {link}
                 </Link>
               ) : (
@@ -228,12 +228,12 @@ const App = () => {
                 <Link key={link} to="/work" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold text-slate-600">
                   {link}
                 </Link>
-              ) : link === 'Home' ? (
-                <Link key={link} to="/" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold text-slate-600">
-                  {link}
-                </Link>
               ) : link === 'Contact' ? (
                 <Link key={link} to="/contact" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold text-slate-600">
+                  {link}
+                </Link>
+              ) : link === 'Home' ? (
+                <Link key={link} to="/" onClick={() => setIsMenuOpen(false)} className="text-lg font-bold text-slate-600">
                   {link}
                 </Link>
               ) : (
