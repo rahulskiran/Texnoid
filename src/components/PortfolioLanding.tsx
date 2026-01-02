@@ -233,9 +233,7 @@ const App = () => {
                 We Don't Just Design. <br /> We <span className="text-red-600">Develop.</span>
               </h1>
               <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed font-medium">
-              <p className="text-slate-600 text-lg leading-relaxed">
-               From high-converting <span className="text-slate-900 font-bold">websites</span> and scalable <span className="text-slate-900 font-bold">web & mobile apps</span> to <span className="text-slate-900 font-bold">Shopify maintenance plans</span> and <span className="text-slate-900 font-bold">professional trainings</span>, we engineer growth-focused digital products.
-              </p>
+              From high-conversion websites to scalable web & mobile apps, we engineer digital products that grow businesses. Shopify maintenance and training solutions come next.
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
                 <button className="w-full sm:w-auto px-10 py-5 bg-red-600 text-white rounded-2xl font-black text-lg hover:bg-slate-900 shadow-xl shadow-red-200 transition-all flex items-center justify-center gap-2">
