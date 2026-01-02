@@ -233,7 +233,9 @@ const App = () => {
                 We Don't Just Design. <br /> We <span className="text-red-600">Develop.</span>
               </h1>
               <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed font-medium">
-                From high-conversion <span className="text-slate-900 font-bold">Shopify Plus</span> stores and <span className="text-slate-900 font-bold">SaaS</span> architectures to <span className="text-slate-900 font-bold">certified trainings</span>. We bridge the gap between technical complexity and business growth.
+              <p className="text-slate-600 text-lg leading-relaxed">
+               From high-converting <span className="text-slate-900 font-bold">websites</span> and scalable <span className="text-slate-900 font-bold">web & mobile apps</span> to <span className="text-slate-900 font-bold">Shopify maintenance plans</span> and <span className="text-slate-900 font-bold">professional trainings</span>, we engineer growth-focused digital products.
+              </p>
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
                 <button className="w-full sm:w-auto px-10 py-5 bg-red-600 text-white rounded-2xl font-black text-lg hover:bg-slate-900 shadow-xl shadow-red-200 transition-all flex items-center justify-center gap-2">
@@ -278,7 +280,7 @@ const App = () => {
       <section id="services" className="py-32 bg-slate-50/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black mb-6">Mastery Across Verticals</h2>
+            <h2 className="text-4xl md:text-5xl font-black mb-6">Our Services</h2>
             <p className="text-slate-500 max-w-3xl mx-auto text-lg font-medium">We don't just provide services; we provide competitive advantages. Our multidisciplinary team ensures your digital footprint is powerful, modern, and high-performing.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
