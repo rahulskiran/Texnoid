@@ -66,3 +66,91 @@ html {
   }
 }
 
+/* Workflow Section Styles */
+:root {
+  --workflow-accent: 220 38 38; /* Red-600 */
+  --workflow-crimson: 185 28 28; /* Red-700 */
+  --workflow-rose: 225 29 72; /* Rose-600 */
+  --workflow-coral: 244 63 94; /* Rose-500 */
+  --workflow-background: 255 255 255; /* White */
+  --workflow-foreground: 15 23 42; /* Slate-900 */
+  --workflow-muted: 100 116 139; /* Slate-500 */
+  --workflow-border: 226 232 240; /* Slate-200 */
+}
+
+.workflow-section {
+  background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+}
+
+.workflow-card {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.workflow-glow {
+  box-shadow: 0 0 40px rgba(220, 38, 38, 0.3), 0 0 80px rgba(220, 38, 38, 0.1);
+}
+
+.workflow-xl {
+  box-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.25);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.2; transform: scale(1.05); }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-delayed {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes draw {
+  to { stroke-dasharray: 200 0; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+.animate-breathe { animation: breathe 8s ease-in-out infinite; }
+.animate-slide-down { animation: slide-down 0.8s ease-out; }
+.animate-slide-up { animation: slide-up 0.8s ease-out 0.2s both; }
+.animate-fade-in-delayed { animation: fade-in-delayed 0.8s ease-out 0.4s both; }
+.animate-gradient { animation: gradient 3s ease infinite; background-size: 200% 200%; }
+.animate-draw { animation: draw 2s ease-out 0.5s both; stroke-dasharray: 0 200; }
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* Gradient utilities */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}

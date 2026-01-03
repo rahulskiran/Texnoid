@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   CheckCircle2, 
@@ -19,7 +19,10 @@ import {
   GraduationCap,
   ExternalLink,
   Layers,
-  Award
+  Award,
+  Search,
+  Rocket,
+  Sparkles
 } from 'lucide-react';
 
 // --- Portfolio Data (Descriptive) ---
@@ -73,6 +76,329 @@ const portfolioProjects = [
     desc: "Data-driven organic content roadmap that increased inbound leads by 300% without spending a single rupee on paid advertisements."
   }
 ];
+
+const steps = [
+  {
+    number: "01",
+    title: "Discovery",
+    description: "We dive deep into your brand, goals, and target audience to understand what makes you unique.",
+    icon: Search,
+  },
+  {
+    number: "02",
+    title: "Strategy",
+    description: "Crafting a tailored roadmap that aligns your vision with actionable, measurable objectives.",
+    icon: Sparkles,
+  },
+  {
+    number: "03",
+    title: "Design",
+    description: "Creating stunning visuals and intuitive experiences that captivate and convert your audience.",
+    icon: Palette,
+  },
+  {
+    number: "04",
+    title: "Development",
+    description: "Building robust, scalable solutions with cutting-edge technology and clean, maintainable code.",
+    icon: Code2,
+  },
+  {
+    number: "05",
+    title: "Launch",
+    description: "Deploying your project with precision and providing ongoing support for continued success.",
+    icon: Rocket,
+  },
+];
+
+const FloatingShape = ({ className, delay }: { className: string; delay: number }) => (
+  <div 
+    className={`absolute rounded-full opacity-20 animate-float ${className}`}
+    style={{ animationDelay: `${delay}s` }}
+  />
+);
+
+const WorkflowSection = () => {
+  const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
+  const [activeStep, setActiveStep] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const stepIndex = parseInt(entry.target.getAttribute("data-index") || "0");
+            setVisibleSteps((prev) => [...new Set([...prev, stepIndex])]);
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    const stepElements = document.querySelectorAll(".workflow-step");
+    stepElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="workflow-section relative py-20 md:py-32 px-4 md:px-8 lg:px-16 overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Gradient Orbs */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-radial from-workflow-accent/30 to-transparent rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-radial from-workflow-rose/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-workflow-crimson/10 to-transparent rounded-full blur-3xl animate-breathe" />
+        
+        {/* Floating Shapes */}
+        <FloatingShape className="top-[15%] left-[5%] w-4 h-4 bg-workflow-accent" delay={0} />
+        <FloatingShape className="top-[25%] right-[10%] w-6 h-6 bg-workflow-rose" delay={0.5} />
+        <FloatingShape className="bottom-[30%] left-[15%] w-3 h-3 bg-workflow-crimson" delay={1} />
+        <FloatingShape className="top-[60%] right-[20%] w-5 h-5 bg-workflow-accent" delay={1.5} />
+        <FloatingShape className="bottom-[20%] right-[5%] w-4 h-4 bg-workflow-rose" delay={2} />
+        <FloatingShape className="top-[40%] left-[8%] w-2 h-2 bg-workflow-coral" delay={2.5} />
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16 md:mb-24">
+          <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-workflow-accent/10 to-workflow-rose/10 border border-workflow-accent/20 text-workflow-accent font-semibold tracking-widest uppercase text-xs md:text-sm mb-6 animate-slide-down">
+            <span className="inline-block animate-pulse-dot mr-2">●</span>
+            How We Work
+          </span>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-workflow-foreground mb-6 leading-tight animate-slide-up">
+            Our{" "}
+            <span className="relative inline-block">
+              <span className="bg-gradient-to-r from-workflow-accent via-workflow-crimson to-workflow-rose bg-clip-text text-transparent animate-gradient">
+                Process
+              </span>
+              <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
+                <path d="M2 8C50 2 150 2 198 8" stroke="url(#underline-gradient)" strokeWidth="4" strokeLinecap="round" className="animate-draw" />
+                <defs>
+                  <linearGradient id="underline-gradient" x1="0" y1="0" x2="200" y2="0">
+                    <stop offset="0%" stopColor="hsl(var(--workflow-accent))" />
+                    <stop offset="50%" stopColor="hsl(var(--workflow-crimson))" />
+                    <stop offset="100%" stopColor="hsl(var(--workflow-rose))" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+          </h2>
+          <p className="text-workflow-muted text-lg md:text-xl max-w-2xl mx-auto animate-fade-in-delayed">
+            A proven methodology that transforms ideas into exceptional digital experiences.
+          </p>
+        </div>
+
+        {/* Workflow Steps - Desktop */}
+        <div className="hidden lg:block">
+          <div className="flex items-stretch justify-between gap-2">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+              const isVisible = visibleSteps.includes(index);
+              const isActive = activeStep === index;
+              
+              return (
+                <div key={step.number} className="flex items-stretch flex-1">
+                  {/* Step Card */}
+                  <div
+                    data-index={index}
+                    className={`workflow-step group flex-1 transition-all duration-700 ease-out ${
+                      isVisible 
+                        ? "opacity-100 translate-y-0" 
+                        : "opacity-0 translate-y-12"
+                    }`}
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                    onMouseEnter={() => setActiveStep(index)}
+                    onMouseLeave={() => setActiveStep(null)}
+                  >
+                    <div className={`workflow-card relative h-full bg-workflow-background/80 backdrop-blur-xl border-2 rounded-2xl p-5 transition-all duration-500 cursor-pointer overflow-hidden
+                      ${isActive 
+                        ? "border-workflow-accent shadow-workflow-glow scale-[1.02] -translate-y-2" 
+                        : "border-workflow-border hover:border-workflow-accent/50"
+                      }`}
+                    >
+                      {/* Card Glow Effect */}
+                      <div className={`absolute inset-0 bg-gradient-to-br from-workflow-accent/5 via-transparent to-workflow-rose/5 transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+
+                      <div className="relative z-10">
+                        {/* Step Number Badge */}
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm transition-all duration-500 ${
+                            isActive 
+                              ? 'bg-gradient-to-br from-workflow-accent to-workflow-crimson text-workflow-background' 
+                              : 'bg-workflow-accent/10 text-workflow-accent'
+                          }`}>
+                            {step.number}
+                          </div>
+                          <div className={`h-0.5 flex-1 rounded-full transition-all duration-500 ${
+                            isActive ? 'bg-gradient-to-r from-workflow-accent to-transparent' : 'bg-workflow-border'
+                          }`} />
+                        </div>
+
+                        {/* Icon */}
+                        <div className={`relative w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 ${
+                          isActive 
+                            ? 'bg-gradient-to-br from-workflow-accent to-workflow-crimson shadow-workflow' 
+                            : 'bg-gradient-to-br from-workflow-accent/10 to-workflow-rose/10'
+                        }`}>
+                          <Icon className={`w-6 h-6 transition-all duration-500 ${isActive ? 'text-workflow-background' : 'text-workflow-accent'}`} />
+                          {isActive && (
+                            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-workflow-accent to-workflow-crimson animate-ping opacity-30" />
+                          )}
+                        </div>
+
+                        {/* Content */}
+                        <h3 className={`text-lg font-bold mb-2 transition-all duration-500 ${isActive ? 'text-workflow-accent' : 'text-workflow-foreground'}`}>
+                          {step.title}
+                        </h3>
+                        <p className="text-workflow-muted text-sm leading-relaxed">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Arrow Connector */}
+                  {index < steps.length - 1 && (
+                    <div className="flex items-center justify-center w-8 shrink-0">
+                      <div className={`flex items-center transition-all duration-500 ${
+                        visibleSteps.includes(index) ? 'opacity-100' : 'opacity-30'
+                      }`}>
+                        <div className={`w-4 h-0.5 rounded-full transition-all duration-500 ${
+                          visibleSteps.includes(index + 1) 
+                            ? 'bg-gradient-to-r from-workflow-accent to-workflow-crimson' 
+                            : 'bg-workflow-border'
+                        }`} />
+                        <svg 
+                          className={`w-4 h-4 -ml-1 transition-all duration-500 ${
+                            visibleSteps.includes(index + 1) ? 'text-workflow-crimson' : 'text-workflow-border'
+                          }`} 
+                          fill="currentColor" 
+                          viewBox="0 0 20 20"
+                        >
+                          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Workflow Steps - Mobile & Tablet */}
+        <div className="lg:hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+              const isVisible = visibleSteps.includes(index);
+              const isActive = activeStep === index;
+              
+              return (
+                <div key={step.number}>
+                  <div
+                    data-index={index}
+                    className={`workflow-step group transition-all duration-700 ease-out ${
+                      isVisible 
+                        ? "opacity-100 translate-y-0" 
+                        : "opacity-0 translate-y-12"
+                    }`}
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                    onMouseEnter={() => setActiveStep(index)}
+                    onMouseLeave={() => setActiveStep(null)}
+                  >
+                    <div className={`workflow-card relative h-full bg-workflow-background/80 backdrop-blur-xl border-2 rounded-2xl p-6 transition-all duration-500 cursor-pointer overflow-hidden
+                      ${isActive 
+                        ? "border-workflow-accent shadow-workflow-glow" 
+                        : "border-workflow-border"
+                      }`}
+                    >
+                      <div className={`absolute inset-0 bg-gradient-to-br from-workflow-accent/5 via-transparent to-workflow-rose/5 transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+
+                      <div className="relative z-10">
+                        {/* Header Row */}
+                        <div className="flex items-center gap-4 mb-4">
+                          {/* Step Number */}
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold transition-all duration-500 ${
+                            isActive 
+                              ? 'bg-gradient-to-br from-workflow-accent to-workflow-crimson text-workflow-background' 
+                              : 'bg-workflow-accent/10 text-workflow-accent'
+                          }`}>
+                            {step.number}
+                          </div>
+                          
+                          {/* Icon */}
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                            isActive 
+                              ? 'bg-gradient-to-br from-workflow-crimson to-workflow-rose' 
+                              : 'bg-gradient-to-br from-workflow-accent/10 to-workflow-rose/10'
+                          }`}>
+                            <Icon className={`w-6 h-6 transition-all duration-500 ${isActive ? 'text-workflow-background' : 'text-workflow-accent'}`} />
+                          </div>
+                          
+                          <div className="flex-1">
+                            <h3 className={`text-xl font-bold transition-all duration-500 ${isActive ? 'text-workflow-accent' : 'text-workflow-foreground'}`}>
+                              {step.title}
+                            </h3>
+                          </div>
+                        </div>
+
+                        <p className="text-workflow-muted text-sm leading-relaxed">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Mobile Connector - Only on single column */}
+                  {index < steps.length - 1 && (
+                    <div className="sm:hidden flex justify-center my-4">
+                      <div className={`flex flex-col items-center gap-1 transition-all duration-700 ${
+                        isVisible ? "opacity-100" : "opacity-30"
+                      }`}>
+                        <div className="w-0.5 h-4 bg-gradient-to-b from-workflow-accent to-workflow-crimson rounded-full" />
+                        <svg className="w-4 h-4 text-workflow-crimson" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-16 md:mt-24 animate-fade-in-delayed" style={{ animationDelay: '0.8s' }}>
+          <button className="workflow-cta group relative inline-flex items-center gap-3 px-10 py-5 font-bold text-lg rounded-full overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-workflow-xl active:scale-95">
+            {/* Button Background Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-r from-workflow-accent via-workflow-crimson to-workflow-rose" />
+            <div className="absolute inset-0 bg-gradient-to-r from-workflow-crimson via-workflow-rose to-workflow-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Shimmer Effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
+            </div>
+            
+            <span className="relative z-10 text-workflow-background">Start Your Project</span>
+            <svg className="w-5 h-5 relative z-10 text-workflow-background group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </button>
+          
+          <p className="mt-6 text-workflow-muted text-sm">
+            No commitment required • Free consultation
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -327,6 +653,9 @@ const App = () => {
         </div>
       </section>
 
+      {/* Workflow Section */}
+      <WorkflowSection />
+
       {/* Portfolio Section */}
       <section id="portfolio" className="py-32 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
@@ -526,7 +855,7 @@ const App = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 bg-slate-50 border-t border-slate-100">
+      <footer className="py-16 bg-slate-900 border-t border-slate-700">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-2">
@@ -546,9 +875,9 @@ const App = () => {
                         <span className="text-white font-bold text-xl">T</span>
                     </div>
                 </div>
-                <span className="text-xl sm:text-2xl font-black uppercase tracking-widest text-slate-900">Texnoid Solutions LLP</span>
+                <span className="text-xl sm:text-2xl font-black uppercase tracking-widest text-white">Texnoid Solutions LLP</span>
               </div>
-              <p className="text-slate-500 max-sm font-medium leading-relaxed mb-4">
+              <p className="text-slate-400 max-sm font-medium leading-relaxed mb-4">
                 A multi-disciplinary digital execution agency and training center. We specialize in Shopify Plus, SaaS development, mobile applications, and professional training modules.
               </p>
               <p className="text-xs font-black text-red-600 uppercase tracking-widest">
@@ -556,8 +885,8 @@ const App = () => {
               </p>
             </div>
             <div>
-              <h4 className="font-black mb-6 uppercase tracking-widest text-xs text-slate-400">Services</h4>
-              <ul className="space-y-4 text-sm font-bold text-slate-600">
+              <h4 className="font-black mb-6 uppercase tracking-widest text-xs text-slate-500">Services</h4>
+              <ul className="space-y-4 text-sm font-bold text-slate-300">
                 <li><a href="#" className="hover:text-red-600">Shopify Care</a></li>
                 <li><a href="#" className="hover:text-red-600">Mobile Apps</a></li>
                 <li><a href="#" className="hover:text-red-600">SaaS Logic</a></li>
@@ -565,8 +894,8 @@ const App = () => {
               </ul>
             </div>
             <div>
-              <h4 className="font-black mb-6 uppercase tracking-widest text-xs text-slate-400">Online Trainings</h4>
-              <ul className="space-y-4 text-sm font-bold text-slate-600">
+              <h4 className="font-black mb-6 uppercase tracking-widest text-xs text-slate-500">Online Trainings</h4>
+              <ul className="space-y-4 text-sm font-bold text-slate-300">
                 <li><a href="#" className="hover:text-red-600">Internships</a></li>
                 <li><a href="#" className="hover:text-red-600">Certifications</a></li>
                 <li><a href="#" className="hover:text-red-600">Curriculum</a></li>
@@ -574,12 +903,12 @@ const App = () => {
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-sm font-bold text-slate-400">© {new Date().getFullYear()} Texnoid Solutions LLP. All rights reserved. Registered Digital Agency.</p>
+          <div className="pt-8 border-t border-slate-600 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-sm font-bold text-slate-500">© {new Date().getFullYear()} Texnoid Solutions LLP. All rights reserved. Registered Digital Agency.</p>
             <div className="flex gap-8">
-               <a href="#" className="text-slate-400 hover:text-red-600 transition-colors"><MessageSquare className="w-5 h-5" /></a>
-               <a href="#" className="text-slate-400 hover:text-red-600 transition-colors"><Settings className="w-5 h-5" /></a>
-               <a href="#" className="text-slate-400 hover:text-red-600 transition-colors"><Package className="w-5 h-5" /></a>
+               <a href="#" className="text-slate-500 hover:text-red-600 transition-colors"><MessageSquare className="w-5 h-5" /></a>
+               <a href="#" className="text-slate-500 hover:text-red-600 transition-colors"><Settings className="w-5 h-5" /></a>
+               <a href="#" className="text-slate-500 hover:text-red-600 transition-colors"><Package className="w-5 h-5" /></a>
             </div>
           </div>
         </div>
